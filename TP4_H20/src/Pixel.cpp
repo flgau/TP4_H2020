@@ -63,23 +63,38 @@ void Pixel::setBleu(int bleu) {
  * @brief retourn l'attribut rouge_ du pixel
  * @return rouge_ du type uint8_t
  */
-uint8_t Pixel::getRouge() const { return rouge_; }
+uint8_t Pixel::getRouge() const 
+{ 
+    return rouge_;
+}
 
 /**
  * @brief retourn l'attribut vert_ du pixel
  * @return vert_ du type uint8_t
  */
-uint8_t Pixel::getVert() const { return vert_; }
+uint8_t Pixel::getVert() const 
+{ 
+    return vert_;
+}
 /**
  * @brief retourn l'attribut bleu_ du pixel
  * @return bleu_ du type uint8_t
  */
-uint8_t Pixel::getBleu() const { return bleu_; }
+uint8_t Pixel::getBleu() const
+{ 
+    return bleu_;
+}
 
 std::ostream &operator<<(std::ostream &os, Pixel pixel) {
   // TO DO
+    // jai pas catche lutilite dutilisé un setfill pour ca???
+    os << "#" << std::hex << std::uppercase << pixel.getRouge() 
+        << std::setw(1) << pixel.getVert() << std::setw(1) 
+        << pixel.getBleu() << std::endl;
+    return os;
 }
 
-std::istream &operator>>(std::istream &is, Pixel &pixel) {
-  // TO DO
+std::istream& operator>>(std::istream& is, Pixel& pixel) {
+    // TO DO
+    // gros blanc de memoire
 }
