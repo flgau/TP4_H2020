@@ -48,8 +48,14 @@ static constexpr int CAPACITE_MATRICE = 100;
 /**
  * @brief constructeur par défaut de la classe
  */
-template <typename T> inline Matrice<T>::Matrice() {
+template <typename T> inline Matrice<T>::Matrice()
+    :height_(0),
+    width_(0)
+    elements_ (CAPACITE_MATRICE)
+{
+
   // TO DO
+
 }
 /**
  * @brief retourne le nombre de lignes de la matrice
