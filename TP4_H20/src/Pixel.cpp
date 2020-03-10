@@ -97,4 +97,17 @@ std::ostream &operator<<(std::ostream &os, Pixel pixel) {
 std::istream& operator>>(std::istream& is, Pixel& pixel) {
     // TO DO
     // gros blanc de memoire
+    int bleu;
+    int vert;
+    int rouge;
+    std::string espace = " ";
+    while (is >> rouge >>espace >> vert >> espace >> bleu)
+    {
+        pixel.setRouge(rouge);
+        pixel.setVert(vert);
+        pixel.setBleu(bleu);
+        break;
+    }
+    return is;
+
 }
