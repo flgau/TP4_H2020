@@ -102,7 +102,7 @@ std::istream& operator>>(std::istream& is, Pixel& pixel) {
     int vert;
     int rouge;
     std::string espace = " ";
-    while (is >> rouge >>espace >> vert >> espace >> bleu)
+    while (is >> rouge >>espace>> vert >> espace >> bleu)
     {
         pixel.setRouge(rouge);
         pixel.setVert(vert);
