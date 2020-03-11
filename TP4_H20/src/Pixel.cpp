@@ -88,9 +88,10 @@ uint8_t Pixel::getBleu() const
 std::ostream &operator<<(std::ostream &os, Pixel pixel) {
   // TO DO
     // jai pas catche lutilite dutilisé un setfill pour ca???
-    os << "#" << std::hex << std::uppercase << int(pixel.getRouge()) 
-        << std::setw(1) << int(pixel.getVert()) << std::setw(1) 
-        << int(pixel.getBleu()) << std::endl;
+    os << "#" << std::hex << std::uppercase
+     <<std::setfill('0') << int(pixel.getRouge()) << std::setfill(' ') << std::setw(3) 
+     <<std::setfill('0') << int(pixel.getVert()) << std::setfill(' ') << std::setw(3) 
+     <<std::setfill('0') << int(pixel.getBleu()) << std::setfill(' ') << std::setw(3)  << std::endl;
     return os;
 }
 
