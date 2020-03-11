@@ -60,7 +60,7 @@ template <typename T> inline Matrice<T>::Matrice()
 /**
  * @brief retourne le nombre de lignes de la matrice
  * @return l'attribut height_ de l'objet
- */
+ */ 
 template <typename T> inline size_t Matrice<T>::getHeight() const {
   return height_;
 }
@@ -88,4 +88,25 @@ inline T Matrice<T>::operator()(const size_t& posY, const size_t& posX) const
         
     }
 
+}
+
+ template <typename T> bool Matrice<T>::ajouterElement(T element, const size_t &posY, const size_t &posX){
+
+    if (posY>height_ || posX>width_){
+      return false;
+    }
+    else
+    {
+      elements_[posY][posX]=element;
+    }
+    
+    return true;
+
+   
+}
+
+
+template <typename T> bool Matrice<T>::lireElement(const std::string &elementFichier, const size_t &posY,
+                                                          const size_t &posX){
+    
 }
