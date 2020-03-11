@@ -73,3 +73,19 @@ template <typename T> inline size_t Matrice<T>::getWidth() const {
 }
 
 #endif
+
+template<typename T>
+inline T Matrice<T>::operator()(const size_t& posY, const size_t& posX) const
+{
+    if (posY>height_ || posX>width_)
+    {
+        return T();
+    }
+    else {
+        return elements_[posY][posX];
+          
+
+        
+    }
+
+}
