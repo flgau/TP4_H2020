@@ -29,8 +29,9 @@ private:
  */
 template <typename M>
 Image<M>::Image(std::unique_ptr<M> matrice)
-    : matrice_(std::move(matrice)), agrandissement_(matrice.get()),
-      pivotement_(matrice.get()) {}
+    : agrandissement_(matrice.get()),
+      pivotement_(matrice.get()),
+      matrice_(std::move(matrice)) {}
 
 /**
  * @brief retourne la matrice de l'image

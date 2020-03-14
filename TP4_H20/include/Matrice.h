@@ -49,13 +49,12 @@ static constexpr int CAPACITE_MATRICE = 100;
  * @brief constructeur par défaut de la classe
  */
 template <typename T> inline Matrice<T>::Matrice()
-    :height_(0),
-    width_(0),
-    elements_ (CAPACITE_MATRICE)
+    :elements_ (CAPACITE_MATRICE,std::vector<T>(CAPACITE_MATRICE))
+    ,height_(0)
+    ,width_(0)
+    
 {
-
-  // TO DO
-
+  
 }
 /**
  * @brief retourne le nombre de lignes de la matrice
@@ -123,19 +122,19 @@ template<typename T>
 inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
 {
     std::ifstream fichierLecture(nomFichier);
-    if (fichier) {
+    if (fichierLecture) {
         elements_.clear();
         std::string ligne;
         
         width_ = CAPACITE_MATRICE;
         height_ = CAPACITE_MATRICE;
 
-        int nombreL = 0;
+       
         int hauteur = 0;
         int largeur = 0;
         while (std::getline(fichierLecture, ligne))
         {    
-            if (ligne !=L)
+            if (ligne !="L")
             {
                 if (!lireElement(ligne, hauteur, largeur++)) 
                 {
@@ -168,7 +167,7 @@ template <typename T> bool Matrice<T>::lireElement(const std::string& elementFic
     if (elementFichier>>element)
     {
         //static_cast<T> (elementFichier);
-        return Matrice::ajouterElement(element, posY, posX);T
+        return Matrice::ajouterElement(element, posY, posX);
 
     }
     return false;

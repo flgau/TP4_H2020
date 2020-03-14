@@ -24,9 +24,11 @@ private:
 /**
  * @brief constructeur par défaut de la classe
  */
-template <class M> AgrandirMatrice<M>::AgrandirMatrice() {
-  // TO DO
-}
+template <class M> AgrandirMatrice<M>::AgrandirMatrice()  
+  :matrice_(nullptr)
+ {
+   matrice_=new M;
+ }
 /**
  * @brief constructeur par paramètre de la classe
  */
@@ -44,8 +46,24 @@ template <class M>
 Coordonnees
 AgrandirMatrice<M>::trouverLePlusProcheVoisin(const unsigned int &rapport,
                                               size_t posY, size_t posX) const {
-  // TO DO
-  return {};
+  
+  return {posX/rapport,posY/rapport};
 }
+
+
+ template <class M>
+ void AgrandirMatrice<M>::redimensionnerImage(const unsigned int &rapport){
+  std::unique_ptr <M> clone =matrice_.clone();
+   clone.setWidth(clone.width_*rapport);
+   clone.setHeight(clone.height*rapport);
+   for(size_t i =0;i<clone.width_;i++){
+     for(size_t j=0; j<clone.height;i++){
+       clone.trouverLePlusProcheVoisin(rapport,i,j);
+       matrice_->operator()(i,j)=clone->operator()(i,j);
+     }
+   }
+ }
+
+
 
 #endif
