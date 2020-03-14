@@ -164,9 +164,11 @@ template <typename T> bool Matrice<T>::lireElement(const std::string& elementFic
     const size_t& posX) 
 {
     T element;
-    if (elementFichier>>element)
+    std::istringstream stream = static_cast<std::istringstream>(elementFichier);
+
+    if (stream>>element)
     {
-        //static_cast<T> (elementFichier);
+        
         return Matrice::ajouterElement(element, posY, posX);
 
     }
