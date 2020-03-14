@@ -7,6 +7,7 @@
 #define AGRANDIR_MATRICE_H
 
 #include "def.h"
+#include "Matrice.h"
 
 template <class M> class AgrandirMatrice {
 public:
@@ -52,18 +53,42 @@ AgrandirMatrice<M>::trouverLePlusProcheVoisin(const unsigned int &rapport,
 
 
  template <class M>
- void AgrandirMatrice<M>::redimensionnerImage(const unsigned int &rapport){
-  std::unique_ptr <M> clone =matrice_.clone();
-   clone.setWidth(clone.width_*rapport);
-   clone.setHeight(clone.height*rapport);
-   for(size_t i =0;i<clone.width_;i++){
-     for(size_t j=0; j<clone.height;i++){
-       clone.trouverLePlusProcheVoisin(rapport,i,j);
-       matrice_->operator()(i,j)=clone->operator()(i,j);
+ void AgrandirMatrice<M>::redimensionnerImage(const unsigned int& rapport) {
+     
+     std::unique_ptr<M> clone = matrice_->clone();
+     int myElement = 0;
+     matrice_->setHeight((clone->getHeight()) * rapport);
+     matrice_->setWidth((clone->getWidth()) * rapport);
+     for (size_t i = 0; i < matrice_->getHeight(); i++)
+     {
+         for (size_t j = 0; j < matrice_->getWidth(); j++)
+         {      
+             Coordonnees coordoAPlacer = trouverLePlusProcheVoisin(rapport, i, j);
+             matrice_->ajouterElement(myElement, j, i);
+         }
+
+     }
+     
+
+   
+ }
+
+
+
+/*
+   std::unique_ptr <M> clone =matrice_->clone();
+   clone->setWidth(matrice_->getWidth()*rapport);
+   clone->setHeight(matrice_->getHeight()*rapport);
+   for(size_t i =0;i<clone->getWidth();i++){
+     for(size_t j=0; j<clone->getHeight();i++){
+       AgrandirMatrice::trouverLePlusProcheVoisin(rapport,i,j);
+       //matrice_->operator()(i,j)=clone->operator()(i,j);
+       *matrice_(i,j) = *clone
+       
      }
    }
  }
-
+ */
 
 
 #endif

@@ -45,8 +45,8 @@ inline PivoterMatrice<M>::PivoterMatrice(M *matrice) : matrice_(matrice) {}
 template <class M>
 inline Coordonnees
 PivoterMatrice<M>::changerCoordonneesCentreMatrice(Coordonnees coords) const {
-  int posX =(-1*(matrice_.width/2))+coords.x;
-  int posY =(-1*(matrice_.height/2))+coords.y;
+  int posX =(-1*(matrice_->getWidth()/2))+coords.x;
+  int posY =(-1*(matrice_->getHeight()/2))+coords.y;
 
   
 
@@ -60,20 +60,21 @@ PivoterMatrice<M>::changerCoordonneesCentreMatrice(Coordonnees coords) const {
  */
 template <class M> inline 
 Coordonnees PivoterMatrice<M>::recupererCoordonnees(Coordonnees coords) const {
-  int posX =(matrice_.width/2)+coords.x;
-  int posY =(matrice_.height/2)+coords.y;
+  int posX =(matrice_->getWidth()/2)+coords.x;
+  int posY =(matrice_->getHeight()/2)+coords.y;
 
   return {posX,posY};
 }
 
 template <class M> inline
 void PivoterMatrice<M>::pivoterMatrice(Direction direction){
-  std::unique_ptr<M> clone =matrice_.clone();
+  std::unique_ptr<M> clone =matrice_->clone();
   Coordonnees tampon;
   int inverse=-1;
-  for(int i=0;i<matrice_.getHeight();i++){
-    for(int j=0; j< matrice_.getWidth();j++){
-      Coordonnees coordo =  clone.changerCoordonnesCentreMatrice(j,i);
+  for(int i=0;i<matrice_->getHeight();i++){
+    for(int j=0; j< matrice_->getWidth();j++){
+        Coordonnees coordoTempo = { j, i };
+        Coordonnees coordo = PivoterMatrice::changerCoordonneesCentreMatrice(coordoTempo);
       if(direction==Direction::Right){
         tampon=coordo;
         coordo.x= inverse*tampon.y;
