@@ -134,6 +134,8 @@ inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
     if (fichierLecture) {
         elements_.clear();
         std::string ligne;
+        bool estBienLu = false;
+
         
         width_ = CAPACITE_MATRICE;
         height_ = CAPACITE_MATRICE;
@@ -146,11 +148,12 @@ inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
         {    
             if (ligne !="L")
             {
-                if (!lireElement(ligne, nbLignes-1, largeur++)) 
-                {
-                    return false;
-                }
+                lireElement(ligne, nbLignes - 1, largeur++);
                 
+                
+                    
+                
+               
             }
             else
             {
@@ -158,7 +161,9 @@ inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
                 largeur = 0;
 
             }
+            
         }
+
         width_ = largeur;
         height_ = nbLignes;
         return true;
@@ -175,9 +180,9 @@ template <typename T> bool Matrice<T>::lireElement(const std::string& elementFic
     const size_t& posX) 
 {
     T element;
-    std::istringstream stream = static_cast<std::istringstream>(elementFichier);
+    std::istringstream stringStream = static_cast<std::istringstream>(elementFichier);
 
-    if (stream>>element)
+    if (stringStream>>element)
     {
         
         return Matrice::ajouterElement(element, posY, posX);

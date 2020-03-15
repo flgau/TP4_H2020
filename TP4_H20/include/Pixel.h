@@ -37,4 +37,5 @@ private:
 std::ostream &operator<<(std::ostream &os, Pixel pixel);
 std::istream &operator>>(std::istream &is, Pixel &pixel);
 
+
 #endif

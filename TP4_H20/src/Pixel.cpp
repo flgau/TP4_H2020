@@ -89,16 +89,33 @@ std::ostream &operator<<(std::ostream &os, Pixel pixel) {
   // TO DO
     // jai pas catche lutilite dutilisé un setfill pour ca???
     os << "#" << std::hex << std::uppercase
-     <<std::setfill('0') << int(pixel.getRouge()) << std::setfill(' ') << std::setw(3) 
-     <<std::setfill('0') << int(pixel.getVert()) << std::setfill(' ') << std::setw(3) 
-     <<std::setfill('0') << int(pixel.getBleu()) << std::setfill(' ') << std::setw(3)  << std::endl;
+        << std::setfill('0') << int(pixel.getRouge())<<" " << std::setfill(' ') << std::setw(3)
+        << std::setfill('0') << int(pixel.getVert()) << " " << std::setfill(' ') << std::setw(3)
+        << std::setfill('0') << int(pixel.getBleu()) << std::setfill(' ') << std::setw(3);
     return os;
 }
 
 std::istream& operator>>(std::istream& is, Pixel& pixel) {
     // TO DO
     // gros blanc de memoire
-    int bleu;
+    int rouge, bleu, vert;
+    is >> rouge >> bleu >> vert;
+    pixel.setRouge(rouge);
+    pixel.setBleu(bleu);
+    pixel.setVert(vert);
+    return is;
+
+
+
+
+
+
+
+
+
+
+
+    /*int bleu;
     int vert;
     int rouge;
     std::string espace = " ";
@@ -109,6 +126,6 @@ std::istream& operator>>(std::istream& is, Pixel& pixel) {
         pixel.setBleu(bleu);
         break;
     }
-    return is;
+    return is;*/
 
 }
