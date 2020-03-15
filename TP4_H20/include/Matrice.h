@@ -49,12 +49,15 @@ static constexpr int CAPACITE_MATRICE = 100;
  * @brief constructeur par défaut de la classe
  */
 template <typename T> inline Matrice<T>::Matrice()
-    :elements_ (CAPACITE_MATRICE,std::vector<T>(CAPACITE_MATRICE))
-    ,height_(0)
+    :height_(0)
     ,width_(0)
     
 {
-  
+    elements_.resize(CAPACITE_MATRICE);
+    for (size_t i = 0; i < elements_.size(); i++)
+    {
+        elements_[i].resize(CAPACITE_MATRICE);
+    }
 }
 /**
  * @brief retourne le nombre de lignes de la matrice
@@ -91,10 +94,16 @@ template <typename T> bool Matrice<T>::ajouterElement(T element, const size_t& p
     if (posY > height_ || posX > width_) {
         return false;
     }
-    
-    elements_[posY][posX] = element;
-    return true;
+  
+    elements_.resize(CAPACITE_MATRICE);
 
+    for (size_t i = 0; i < elements_.size(); ++i)
+    {
+        elements_[i].resize(CAPACITE_MATRICE);
+    }
+    elements_[posY][posX] = element;
+    
+    
 
 }
 
@@ -132,11 +141,12 @@ inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
        
         int hauteur = 0;
         int largeur = 0;
+        int nbLignes = 0;
         while (std::getline(fichierLecture, ligne))
         {    
             if (ligne !="L")
             {
-                if (!lireElement(ligne, hauteur, largeur++)) 
+                if (!lireElement(ligne, nbLignes-1, largeur++)) 
                 {
                     return false;
                 }
@@ -144,12 +154,13 @@ inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
             }
             else
             {
-                hauteur++;
+                nbLignes++;
                 largeur = 0;
+
             }
         }
         width_ = largeur;
-        height_ = hauteur;
+        height_ = nbLignes;
         return true;
 
     }

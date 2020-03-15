@@ -47,8 +47,9 @@ template <class M>
 Coordonnees
 AgrandirMatrice<M>::trouverLePlusProcheVoisin(const unsigned int &rapport,
                                               size_t posY, size_t posX) const {
+    Coordonnees coordo = { posX / rapport,posY / rapport };
   
-  return {posX/rapport,posY/rapport};
+  return coordo;
 }
 
 
@@ -56,15 +57,17 @@ AgrandirMatrice<M>::trouverLePlusProcheVoisin(const unsigned int &rapport,
  void AgrandirMatrice<M>::redimensionnerImage(const unsigned int& rapport) {
      
      std::unique_ptr<M> clone = matrice_->clone();
-     int myElement = 0;
      matrice_->setHeight((clone->getHeight()) * rapport);
      matrice_->setWidth((clone->getWidth()) * rapport);
-     for (size_t i = 0; i < matrice_->getHeight(); i++)
+     std::string element;
+     for (int i = 0; i < matrice_->getHeight(); i++)
      {
-         for (size_t j = 0; j < matrice_->getWidth(); j++)
+         for (int j = 0; j < matrice_->getWidth(); j++)
          {      
-             Coordonnees coordoAPlacer = trouverLePlusProcheVoisin(rapport, i, j);
-             matrice_->ajouterElement(myElement, j, i);
+             Coordonnees coordoAPlacer = trouverLePlusProcheVoisin(rapport, i, j);  
+             
+             matrice_->ajouterElement(clone->operator ()(coordoAPlacer.y, coordoAPlacer.x), j, i);
+             
          }
 
      }
