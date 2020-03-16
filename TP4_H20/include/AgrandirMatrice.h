@@ -64,7 +64,7 @@ AgrandirMatrice<M>::trouverLePlusProcheVoisin(const unsigned int &rapport,
      {
          for (int j = 0; j < matrice_->getWidth(); j++)
          {      
-             Coordonnees coordoAPlacer = trouverLePlusProcheVoisin(rapport, i, j);  
+             Coordonnees coordoAPlacer = trouverLePlusProcheVoisin(rapport, j, i);  
              
              matrice_->ajouterElement(clone->operator ()(coordoAPlacer.y, coordoAPlacer.x), j, i);
              
