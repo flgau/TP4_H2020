@@ -52,7 +52,8 @@ AgrandirMatrice<M>::trouverLePlusProcheVoisin(const unsigned int &rapport,
   return coordo;
 }
 
-
+//! Méthode qui redimensionne l'image en utilisant un rapport.
+//! /param rapport    le rapport nouvelleImage/imageOriginal.
  template <class M>
  void AgrandirMatrice<M>::redimensionnerImage(const unsigned int& rapport) {
      

@@ -13,15 +13,19 @@ Pixel::Pixel() : rouge_(0), vert_(0), bleu_(0) {}
 Pixel::Pixel(uint8_t rouge, uint8_t vert, uint8_t bleu)
     : rouge_(rouge), vert_(vert), bleu_(bleu) {}
 
+//!Methode qui copie les éléments du paramètre pixel dans l’objet.
+//! /param Pixel    le pixel a copier.
 void Pixel::operator=(const Pixel &pixel) {
     rouge_ = pixel.rouge_;
     vert_ = pixel.vert_;
     bleu_ = pixel.bleu_;
 }
 
+//!Methode qui affecte l'attribut rouge.
+//! /param rouge    la couleur a affecter.
 void Pixel::setRouge(int rouge) {
   // TO DO
-  //pas certain que cest ca qui faut faire mais cest ce que jai compris
+
     //int five_divided_by_x = (x != 0 ? 5 / x : 0);
     int test_si_rouge_trop_grand = (rouge > 255 ? rouge = 255 : rouge = rouge);
     int test_si_rouge_trop_petit = (rouge < 0 ? rouge = 0 : rouge = rouge);
@@ -44,6 +48,8 @@ void Pixel::setRouge(int rouge) {
     
 }
 
+//!Methode qui affecte l'attribut vert.
+//! /param vert    la couleur a affecter.
 void Pixel::setVert(int vert) {
   // TO DO
     int test_si_vert_trop_grand = (vert > 255 ? vert = 255 : vert = vert);
@@ -53,6 +59,8 @@ void Pixel::setVert(int vert) {
 
 }
 
+//!Methode qui affecte l'attribut bleu.
+//! /param vert    la couleur a affecter.
 void Pixel::setBleu(int bleu) {
   int test_si_bleu_trop_grand = (bleu > 255 ? bleu = 255 : bleu = bleu);
   int test_si_bleu_trop_petit = (bleu < 0 ? bleu = 0 : bleu = bleu);
@@ -85,9 +93,12 @@ uint8_t Pixel::getBleu() const
     return bleu_;
 }
 
+//!Methode qui affiche tous les attributs du pixel.
+//! /param os    stream dans lequel afficher.
+//! /param pixel  le pixel a afficher.
 std::ostream &operator<<(std::ostream &os, Pixel pixel) {
   // TO DO
-    // jai pas catche lutilite dutilisé un setfill pour ca???
+    
     os << "#" << std::hex << std::uppercase << std::setw(2)
         << std::setfill('0') << int(pixel.getRouge()) << " " << std::setw(2)
         << std::setfill('0') << int(pixel.getBleu()) << " " << std::setw(2)
@@ -95,37 +106,17 @@ std::ostream &operator<<(std::ostream &os, Pixel pixel) {
     return os;
 }
 
+//!Methode qui initialise tous les attributs du pixel.
+//! /param is    stream a lire.
+//! /param pixel  le pixel a initialiser.
 std::istream& operator>>(std::istream& is, Pixel& pixel) {
     // TO DO
-    // gros blanc de memoire
+    
     int rouge, bleu, vert;
     is >> rouge >> bleu >> vert;
     pixel.setRouge(rouge);
     pixel.setBleu(bleu);
     pixel.setVert(vert);
-    return is;
-
-
-
-
-
-
-
-
-
-
-
-    /*int bleu;
-    int vert;
-    int rouge;
-    std::string espace = " ";
-    while (is >> rouge >>espace>> vert >> espace >> bleu)
-    {
-        pixel.setRouge(rouge);
-        pixel.setVert(vert);
-        pixel.setBleu(bleu);
-        break;
-    }
-    return is;*/
+    return is; 
 
 }
