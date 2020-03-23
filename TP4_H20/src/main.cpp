@@ -82,8 +82,8 @@ int main() {
     std::cout << imageCouleur << std::endl << std::endl;
     delete imageCouleur;
   }
-
-#else
+#endif
+#if true
   // Tests de la classe Pixel: Tests 1-4
 #if true
   Pixel pixel;
@@ -112,9 +112,8 @@ int main() {
   streamPixel.str("");
   streamPixel << 152 << " " << 35 << " " << 425;
   streamPixel >> pixelLu;
-  pixelOperator = (pixelLu.getRouge() == 152) && (pixelLu.getVert() == 35) &&
-                  (pixelLu.getBleu() == 255);
-  ;
+  pixelOperator = (pixelLu.getRouge() == 152) && (pixelLu.getVert() == 35) && (pixelLu.getBleu() == 255);
+  
   tests.push_back(pixelOperator);
 
 #else

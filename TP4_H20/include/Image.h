@@ -66,7 +66,7 @@ std::ostream &operator<<(std::ostream &os, Image<M> *image) {
       if (j < image->getMatrice()->getWidth() - 1)
         os << image->getMatrice()->operator()(i, j) << " | ";
       else
-        os << image->getMatrice()->operator()(i, j) << " |";
+        os << image->getMatrice()->operator()(i, j) << " | ";
     os << std::endl;
   }
   return os;

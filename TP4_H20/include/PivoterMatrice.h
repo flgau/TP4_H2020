@@ -45,8 +45,8 @@ inline PivoterMatrice<M>::PivoterMatrice(M *matrice) : matrice_(matrice) {}
 template <class M>
 inline Coordonnees
 PivoterMatrice<M>::changerCoordonneesCentreMatrice(Coordonnees coords) const {
-  int posX =(-1*(matrice_->getWidth()/2))+coords.x;
-  int posY =(-1*(matrice_->getHeight()/2))+coords.y;
+  int posX = int((-1*(matrice_->getWidth()/2))+coords.x);
+  int posY = int((-1*(matrice_->getHeight()/2))+coords.y);
 
   return {posX,posY};
 }
@@ -57,13 +57,13 @@ PivoterMatrice<M>::changerCoordonneesCentreMatrice(Coordonnees coords) const {
  */
 template <class M> inline 
 Coordonnees PivoterMatrice<M>::recupererCoordonnees(Coordonnees coords) const {
-  int posX =(matrice_->getWidth()/2)+coords.x;
-  int posY =(matrice_->getHeight()/2)+coords.y;
+  int posX =int((matrice_->getWidth()/2)+coords.x);
+  int posY =int((matrice_->getHeight()/2)+coords.y);
 
   return {posX,posY};
 }
 
-//! Méthode qui pivote la matrice d'un quart de tour a droite ou a gauche.
+//! Méthode qui pivote la matrice d'un quart de tour à droite ou à gauche.
 //! /param direction   la direction dans laquelle faire pivoter la matrice.
 template <class M> inline
 void PivoterMatrice<M>::pivoterMatrice(Direction direction){

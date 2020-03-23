@@ -52,13 +52,8 @@ static constexpr int CAPACITE_MATRICE = 100;
 template <typename T> inline Matrice<T>::Matrice()
     :height_(0)
     ,width_(0)
-    
+	,elements_(CAPACITE_MATRICE,std::vector<T>(CAPACITE_MATRICE))
 {
-    elements_.resize(CAPACITE_MATRICE);
-    for (size_t i = 0; i < elements_.size(); i++)
-    {
-        elements_[i].resize(CAPACITE_MATRICE);
-    }
 }
 /**
  * @brief retourne le nombre de lignes de la matrice
@@ -75,10 +70,10 @@ template <typename T> inline size_t Matrice<T>::getWidth() const {
   return width_;
 }
 
-//!Methode qui etourne l’élément se trouvant à la ligne posY et la colonne posX du tableau elements_.
-//! /param posY    la position sur l'axe des ordonees .
+//!Methode qui retourne l’élément se trouvant à la ligne posY et la colonne posX du tableau elements_.
+//! /param posY    la position sur l'axe des ordonées .
 //! /param posX    le position sur l'axe des abscisses.
-//! /return  l'element a la coordonnee.
+//! /return  l'élément a la coordonnée.
 template<typename T>
 inline T Matrice<T>::operator()(const size_t& posY, const size_t& posX) const
 {
@@ -94,8 +89,9 @@ inline T Matrice<T>::operator()(const size_t& posY, const size_t& posX) const
 }
 
 //!Methode qui ajoute l’élément passé en paramètre dans la position correspondante.
-//! /param posY    la position sur l'axe des ordonees .
+//! /param posY    la position sur l'axe des ordonées .
 //! /param posX    la position sur l'axe des abscisses.
+//! /return  un booléen pour indiqué la réussite ou échec de l'operation.
 template <typename T> bool Matrice<T>::ajouterElement(T element, const size_t& posY, const size_t& posX) {
 
     if (posY > height_ || posX > width_) {
@@ -109,12 +105,12 @@ template <typename T> bool Matrice<T>::ajouterElement(T element, const size_t& p
         elements_[i].resize(CAPACITE_MATRICE);
     }
     elements_[posY][posX] = element;
-    
-    
+    return true;
 
 }
 
 //!Methode qui retourne un pointeur vers une copie de la matrice.
+//! /return  la copie de la matrice.
 template<typename T>
 inline std::unique_ptr<Matrice<T>> Matrice<T>::clone() const
 {
@@ -122,15 +118,15 @@ inline std::unique_ptr<Matrice<T>> Matrice<T>::clone() const
 }
 
 //!Methode qui affecte l'attribut height.
-//! /param height    la hauteur a affecter.
+//! /param height    la hauteur à affecter.
 template<typename T>
 inline void Matrice<T>::setHeight(size_t height)
 {
-    int initHeight = (height == CAPACITE_MATRICE + 10 ? height_ = CAPACITE_MATRICE : height_ = height);
+    (height > CAPACITE_MATRICE  ? height_ = CAPACITE_MATRICE : height_ = height);
 
 }
 //!Methode qui affecte l'attribut width.
-//! /param width    la largeur a affecter.
+//! /param width    la largeur à affecter.
 template<typename T>
 inline void Matrice<T>::setWidth(size_t width)
 { 
@@ -138,7 +134,7 @@ inline void Matrice<T>::setWidth(size_t width)
 }
 
 //!Methode qui charge la matrice à partir du fichier passé en paramètre.
-//! /param nomFichier    le nom du fichier a lire.
+//! /param nomFichier    le nom du fichier é lire.
 //! \return bool représentant si le chargement a été un succès.
 template<typename T>
 inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
@@ -147,12 +143,12 @@ inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
     if (fichierLecture) {
         elements_.clear();
         std::string ligne;
-        bool estBienLu = false;
+        
         
         width_ = CAPACITE_MATRICE;
         height_ = CAPACITE_MATRICE;
 
-        int hauteur = 0;
+       ;
         int largeur = 0;
         int nbLignes = 0;
         while (std::getline(fichierLecture, ligne))
@@ -179,9 +175,9 @@ inline bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier)
 }
 
 
-//! Méthode qui ajoute un element a partir d'un string comportant ses attributs 
-//! \param elementFichier       le string contenant les attributs de element
-//! /param posY    la position sur l'axe des ordonees .
+//! Méthode qui ajoute un element à partir d'un string comportant ses attributs 
+//! \param elementFichier       le string contenant les attributs de élément
+//! /param posY    la position sur l'axe des ordonées .
 //! /param posX    la position sur l'axe des abscisses.
 //! \return bool représentant si l'opération est un succès
 template <typename T> bool Matrice<T>::lireElement(const std::string& elementFichier, const size_t& posY,
